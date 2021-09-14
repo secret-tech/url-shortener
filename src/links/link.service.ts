@@ -22,7 +22,7 @@ export class LinkService {
     if (existing) {
       let ret = new ShowDto()
       ret.longUrl = existing.url
-      ret.shortLink = `http://localhost:8080/${existing.code}`
+      ret.shortLink = `${process.env.REDIRECT_URL}/${existing.code}`
 
       return ret;
     }
@@ -39,7 +39,7 @@ export class LinkService {
 
     let obj = new ShowDto
     obj.longUrl = link.url
-    obj.shortLink = `http://localhost:8080/${link.code}`
+    obj.shortLink = `${process.env.REDIRECT_URL}/${link.code}`
 
     return obj;
   }
