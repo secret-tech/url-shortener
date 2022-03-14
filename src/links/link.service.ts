@@ -1,19 +1,19 @@
 import * as ShortId from 'shortid';
 
-import {Injectable} from '@nestjs/common';
-import {InjectRepository} from '@nestjs/typeorm';
-import {Repository} from 'typeorm';
-import {Link} from './link.entity';
-import {UrlHasher} from './helpers/url-hasher.helper';
-import {CreateDto} from './dto/create.dto';
-import {ShowDto} from './dto/show.dto'
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Link } from './link.entity';
+import { UrlHasher } from './helpers/url-hasher.helper';
+import { CreateDto } from './dto/create.dto';
+import { ShowDto } from './dto/show.dto'
 
 @Injectable()
 export class LinkService {
   constructor(
     @InjectRepository(Link)
     private readonly repo: Repository<Link>,
-  ) {}
+  ) { }
 
   async create(dto: CreateDto): Promise<ShowDto> {
     const hasher = new UrlHasher(dto.longUrl);
@@ -43,9 +43,9 @@ export class LinkService {
 
     return obj;
   }
-  async redirect(hash: string){
+  async redirect(hash: string) {
     return this.repo.findOne({
-      where: {code: hash}
+      where: { code: hash }
     });
   }
 }
