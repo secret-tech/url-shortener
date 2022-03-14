@@ -15,7 +15,7 @@ export class LinksController {
     return this.service.create(dto);
   }
 
-  @Get('short_link/:hash')
+  @Get('/:hash')
   async redirect(@Param('hash') hash: string, @Res() res: Response){
     const link = await this.service.redirect(hash)
     res.redirect(link.url)

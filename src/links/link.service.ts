@@ -20,10 +20,9 @@ export class LinkService {
     const existing = await this.repo.findOne({ urlHash: hasher.hash });
 
     if (existing) {
-      let ret = new ShowDto();
-      ret.longUrl = existing.url;
-      const utm = dto.utm ? '?' + dto.utm : '';
-      ret.shortLink = `http://localhost:8080/${existing.code}${utm}`
+      let ret = new ShowDto()
+      ret.longUrl = existing.url
+      ret.shortLink = `${process.env.REDIRECT_URL}/${existing.code}`
 
       return ret;
     }
@@ -40,7 +39,7 @@ export class LinkService {
 
     let obj = new ShowDto
     obj.longUrl = link.url
-    obj.shortLink = `http://localhost:8080/${link.code}`
+    obj.shortLink = `${process.env.REDIRECT_URL}/${link.code}`
 
     return obj;
   }
